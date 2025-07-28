@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Avatar - CyberDefender</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="character-select.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="cyber-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberDefender</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Loading character selection...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>CyberDefender</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Back to Home</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Character Selection Container -->
+    <div class="character-container">
+        <div class="character-content">
+            <div class="character-header">
+                <h1><i class="fas fa-user-circle"></i> Choose Your Avatar</h1>
+                <p>Select your cyber agent avatar to represent you throughout your mission</p>
+            </div>
+
+            <!-- Current Avatar Display -->
+            <div class="current-avatar-section">
+                <h2>Current Avatar</h2>
+                <div class="current-avatar" id="currentAvatar">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-user-circle"></i>
+                        <span>No avatar selected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avatar Grid -->
+            <div class="avatar-grid">
+                <h2>Available Avatars</h2>
+                <div class="avatars-container" id="avatarsContainer">
+                    <!-- Avatars will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="saveAvatarBtn" class="btn btn-primary" disabled>
+                    <i class="fas fa-save"></i>
+                    <span>Save Avatar</span>
+                </button>
+                <button id="resetAvatarBtn" class="btn btn-secondary">
+                    <i class="fas fa-undo"></i>
+                    <span>Reset to Default</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Avatar Saved!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Your avatar has been successfully saved. It will now appear throughout your CyberDefender experience!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="backToHomeBtn" class="cyber-button">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="character-select.js"></script>
+</body>
+</html> 

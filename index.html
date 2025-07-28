@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberDefender - Become a Cyber Hero</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="cyber-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberDefender</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Initialising security protocols...</p>
+        </div>
+    </div>
+
+    <!-- Main Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <!-- Header Navigation -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberDefender</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-section="play">
+                    <i class="fas fa-play"></i>
+                    <span>Play Game</span>
+                </a>
+                <a href="#" class="nav-link" data-section="progress">
+                    <i class="fas fa-user"></i>
+                    <span>Progress</span>
+                </a>
+                <a href="#" class="nav-link" data-section="resources">
+                    <i class="fas fa-book"></i>
+                    <span>Resources</span>
+                </a>
+                <a href="character-select.html" class="nav-link" id="meSection" data-section="me">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Me</span>
+                </a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="cyber-text">CYBER</span>
+                    <span class="defender-text">DEFENDER</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Become a cyber hero in this futuristic world where you defend against digital threats while learning real-world cybersecurity skills
+                </p>
+                
+                <!-- Name Input Section -->
+                <div class="name-input-section">
+                    <div class="name-input-container">
+                        <label for="playerNameInput" class="name-label">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Enter Your Agent Name</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="playerNameInput" 
+                            class="name-input" 
+                            placeholder="Your full name here...(*can be changed later)"
+                            maxlength="20"
+                            required
+                        >
+                        <div class="name-input-glow"></div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <button id="startMissionBtn" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        <span>Start Mission</span>
+                    </button>
+                    <button id="phishingSimBtn" class="btn btn-primary">
+                        <i class="fas fa-fish"></i>
+                        <span>PHISHING SIMULATION</span>
+                    </button>
+                    <button id="whyCybersecurityBtn" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Why Cybersecurity?</span>
+                    </button>
+                    <button id="rateExperienceBtn" class="btn btn-secondary">
+                        <i class="fas fa-star"></i>
+                        <span>Please rate your experience</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <canvas id="binary-canvas"></canvas>
+
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-content">
+                <h2 class="section-title">Master Cyber Defense</h2>
+                <p class="section-subtitle">Learn through action in an immersive cyberpunk world</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Learn Cybersecurity</h3>
+                        <p>Master essential cyber defense skills through interactive gameplay</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Combat Cyber Threats</h3>
+                        <p>Battle phishing bots, malware drones, and password crackers</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Earn Badges</h3>
+                        <p>Unlock achievements and certificates as you progress</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Protect the Digital World?</h2>
+                <p class="cta-subtitle">Join the cyber defense force and learn skills that protect you in the real world</p>
+                <button id="finalCtaBtn" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    <span>Begin Your Mission</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Game Container -->
+    <div id="gameContainer" class="game-container hidden">
+        <!-- HUD -->
+        <div class="hud">
+            <div class="hud-left">
+                <div class="score">
+                    <i class="fas fa-star"></i>
+                    <span id="score">0</span>
+                </div>
+                <div class="level">
+                    <i class="fas fa-layer-group"></i>
+                    <span id="level">1</span>
+                </div>
+            </div>
+            <div class="hud-center">
+                <div class="lives">
+                    <span id="lives">3</span>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="hud-right">
+                <div class="badges">
+                    <i class="fas fa-medal"></i>
+                    <span id="badges">0</span>
+                </div>
+                <button id="pauseBtn" class="pause-btn">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Game Overlay -->
+        <div id="gameOverlay" class="game-overlay hidden">
+            <div class="overlay-content">
+                <h2 id="gameOverTitle">Mission Complete!</h2>
+                <p id="gameOverMessage">You've defeated the cyber threats and learned valuable security skills!</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-value" id="finalScore">0</span>
+                        <span class="stat-label">Total Score</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="finalLevel">1</span>
+                        <span class="stat-label">Levels Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="finalBadges">0</span>
+                        <span class="stat-label">Badges Earned</span>
+                    </div>
+                </div>
+                <div class="overlay-buttons">
+                    <button id="restartBtn" class="cyber-button">
+                        <span>Play Again</span>
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button id="certificateBtn" class="cyber-button secondary">
+                        <span>Get Certificate</span>
+                        <i class="fas fa-certificate"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div id="questionModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="questionTitle">Security Challenge</h3>
+                <div class="difficulty-badge" id="difficultyBadge">Easy</div>
+            </div>
+            <div class="modal-body">
+                <p id="questionText">Question text goes here...</p>
+                <div class="options" id="optionsContainer">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="questionProgress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Modal -->
+    <div id="answerModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="answerTitle">Result</h3>
+                <div class="result-icon" id="resultIcon">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="result-message" id="resultMessage">
+                    <h4 id="resultHeading">Correct!</h4>
+                    <p id="resultText">Explanation goes here...</p>
+                </div>
+                <div class="explanation-section">
+                    <h5>Simple Explanation:</h5>
+                    <p id="simpleExplanation">Simple explanation for learning difficulties...</p>
+                </div>
+                <div class="real-world-example">
+                    <h5>Real-World Example:</h5>
+                    <p id="realWorldExample">Real-world example goes here...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="continueBtn" class="cyber-button">
+                    <span>Continue Mission</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pauseMenu" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Mission Paused</h3>
+            </div>
+            <div class="modal-body">
+                <div class="pause-options">
+                    <button id="resumeBtn" class="cyber-button">
+                        <span>Resume Mission</span>
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="tipsBtn" class="cyber-button secondary">
+                        <span>Security Tips</span>
+                        <i class="fas fa-lightbulb"></i>
+                    </button>
+                    <button id="cyberPageBtn" class="cyber-button secondary">
+                        <span>Company Digital Page</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+                    <button id="mainMenuBtn" class="cyber-button danger">
+                        <span>Main Menu</span>
+                        <i class="fas fa-home"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Modal -->
+    <div id="tipsModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Cybersecurity Tips & Checklist</h3>
+                <button id="closeTipsBtn" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tips-content">
+                    <div class="tip-section">
+                        <h4><i class="fas fa-shield-alt"></i> Password Security</h4>
+                        <ul>
+                            <li>Use strong, unique passwords for each account</li>
+                            <li>Enable Multi-Factor Authentication (MFA) wherever possible</li>
+                            <li>Never share passwords via email or text</li>
+                            <li>Use a password manager for secure storage</li>
+                        </ul>
+                    </div>
+                    <div class="tip-section">
+                        <h4><i class="fas fa-envelope"></i> Email Security</h4>
+                        <ul>
+                            <li>Be suspicious of urgent requests for money or information</li>
+                            <li>Check sender email addresses carefully</li>
+                            <li>Don't click links in suspicious emails</li>
+                            <li>Report phishing attempts to your IT department</li>
+                        </ul>
+                    </div>
+                    <div class="tip-section">
+                        <h4><i class="fas fa-mobile-alt"></i> Device Security</h4>
+                        <ul>
+                            <li>Keep software and apps updated</li>
+                            <li>Use antivirus software</li>
+                            <li>Lock your devices with PIN or biometrics</li>
+                            <li>Backup important data regularly</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="download-section">
+                    <button id="downloadChecklistBtn" class="cyber-button">
+                        <span>Download Checklist</span>
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Page -->
+    <div id="progressPage" class="progress-page hidden">
+        <!-- Header Navigation -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberDefender</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-section="play">
+                    <i class="fas fa-play"></i>
+                    <span>Play Game</span>
+                </a>
+                <a href="#" class="nav-link active" data-section="progress">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Progress</span>
+                </a>
+                <a href="#" class="nav-link" data-section="resources">
+                    <i class="fas fa-book"></i>
+                    <span>Resources</span>
+                </a>
+                <a href="character-select.html" class="nav-link" id="meSectionProgress" data-section="me">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Me</span>
+                </a>
+            </nav>
+        </header>
+
+        <!-- Progress Content -->
+        <div class="progress-content">
+            <div class="progress-header">
+                <h1 class="progress-title">Your Cyber Journey</h1>
+                <p class="progress-subtitle">Track your progress and celebrate your achievements</p>
+            </div>
+
+            <!-- Key Metrics Summary -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="metric-value" id="progressLevel">3</div>
+                    <div class="metric-label">Level</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="metric-value" id="progressDefeated">6</div>
+                    <div class="metric-label">Defeated</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="metric-value" id="progressAccuracy">75%</div>
+                    <div class="metric-label">Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="metric-value" id="progressBadges">1</div>
+                    <div class="metric-label">Badges</div>
+                </div>
+            </div>
+
+            <!-- Progress Details and Badges -->
+            <div class="progress-sections">
+                <div class="progress-details">
+                    <h3 class="section-heading">
+                        <i class="fas fa-arrow-up"></i>
+                        Progress Details
+                    </h3>
+                    <div class="progress-bars">
+                        <div class="progress-item">
+                            <div class="progress-label">Level Progress</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="levelProgressBar" style="width: 30%"></div>
+                            </div>
+                            <div class="progress-text" id="levelProgressText">3/10</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Knowledge Score</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="knowledgeProgressBar" style="width: 100%"></div>
+                            </div>
+                            <div class="progress-text" id="knowledgeProgressText">600</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Quiz Accuracy</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="accuracyProgressBar" style="width: 75%"></div>
+                            </div>
+                            <div class="progress-text" id="accuracyProgressText">75%</div>
+                        </div>
+                    </div>
+                    <div class="progress-summary">
+                        <div class="summary-item">
+                            <span class="summary-value" id="correctAnswers">6</span>
+                            <span class="summary-label">Correct Answers</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-value" id="totalQuestions">8</span>
+                            <span class="summary-label">Total Questions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-badges">
+                    <h3 class="section-heading">
+                        <i class="fas fa-medal"></i>
+                        Achievement Badges
+                    </h3>
+                    <div class="badges-grid">
+                        <div class="badge-card earned" id="badge-cyber-rookie">
+                            <div class="badge-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Cyber Rookie</h4>
+                                <p>Answer 5 questions correctly</p>
+                                <div class="badge-status">⭐ Earned</div>
+                            </div>
+                        </div>
+                        <div class="badge-card" id="badge-cyber-expert">
+                            <div class="badge-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Cyber Expert</h4>
+                                <p>Answer 15 questions correctly</p>
+                                <div class="badge-status">Locked</div>
+                            </div>
+                        </div>
+                        <div class="badge-card" id="badge-phishing-hunter">
+                            <div class="badge-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Phishing Hunter</h4>
+                                <p>Defeat 5 phishing bots</p>
+                                <div class="badge-status">Locked</div>
+                            </div>
+                        </div>
+                        <div class="badge-card" id="badge-malware-slayer">
+                            <div class="badge-icon">
+                                <i class="fas fa-skull"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Malware Slayer</h4>
+                                <p>Defeat 5 malware drones</p>
+                                <div class="badge-status">Locked</div>
+                            </div>
+                        </div>
+                        <div class="badge-card" id="badge-password-guardian">
+                            <div class="badge-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Password Guardian</h4>
+                                <p>Defeat 5 password crackers</p>
+                                <div class="badge-status">Locked</div>
+                            </div>
+                        </div>
+                        <div class="badge-card" id="badge-cyber-hero">
+                            <div class="badge-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="badge-content">
+                                <h4>Cyber Hero</h4>
+                                <p>Reach level 10</p>
+                                <div class="badge-status">Locked</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encouragement Banner -->
+            <div class="encouragement-banner">
+                <div class="encouragement-icon">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <div class="encouragement-content">
+                    <h3>You're becoming a cyber hero!</h3>
+                    <p>Every question you answer correctly makes you stronger against real cyber threats. Keep learning, keep growing, and keep protecting the digital world!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Cybersecurity Modal -->
+    <div id="whyCybersecurityModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Why Cybersecurity Matters</h3>
+                <button id="closeWhyModalBtn" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="why-content">
+                    <div class="why-section">
+                        <h4><i class="fas fa-shield-alt"></i> Protect Your Digital Life</h4>
+                        <p>In today's connected world, your personal information, finances, and privacy are constantly at risk from cyber threats. Learning cybersecurity helps you protect what matters most.</p>
+                    </div>
+                    <div class="why-section">
+                        <h4><i class="fas fa-users"></i> Protect Your Family & Friends</h4>
+                        <p>Cyber attacks don't just affect individuals - they can spread through social networks, putting your loved ones at risk. Your knowledge can help protect everyone around you.</p>
+                    </div>
+                    <div class="why-section">
+                        <h4><i class="fas fa-briefcase"></i> Advance Your Career</h4>
+                        <p>Cybersecurity skills are in high demand across all industries. Whether you work in tech, healthcare, finance, or any other field, understanding security makes you more valuable.</p>
+                    </div>
+                    <div class="why-section">
+                        <h4><i class="fas fa-globe"></i> Contribute to a Safer Internet</h4>
+                        <p>Every person who learns about cybersecurity makes the internet a safer place for everyone. You become part of the solution, not the problem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Name Prompt Modal -->
+    <div id="certificateNameModal" class="modal hidden">
+      <div class="modal-content large" style="max-width: 400px;">
+        <div class="modal-header">
+          <h3>Enter Your Name</h3>
+        </div>
+        <div class="modal-body">
+          <input id="certificateNameInput" type="text" placeholder="Your Name" style="width: 100%; padding: 0.8rem; font-size: 1.1rem; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 1.5rem;">
+          <button id="certificateNameSubmit" class="cyber-button" style="width: 100%;">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="modal hidden">
+      <div class="modal-content large" id="certificateContent" style="background: white; color: #222; max-width: 700px; padding: 0; border: none; box-shadow: 0 0 40px #00336655;">
+        <div class="certificate-border" style="border: 8px solid #1a2a4f; border-radius: 18px; padding: 0; background: #fff; position: relative;">
+          <div style="padding: 2.5rem 2rem 2rem 2rem; text-align: center;">
+            <div style="font-size: 2.2rem; font-weight: bold; letter-spacing: 0.3rem; color: #1a2a4f; margin-bottom: 0.5rem;">CERTIFICATE</div>
+            <div style="font-size: 1.3rem; font-weight: bold; color: #222; margin-bottom: 2rem;">OF COMPLETION</div>
+            <div style="font-size: 1.1rem; color: #222; margin-bottom: 1.5rem;">This certifies that</div>
+            <div id="certificatePlayerName" style="font-size: 2.3rem; color: #1a2a4f; font-family: 'Orbitron', serif; font-weight: bold; margin-bottom: 0.5rem;">Player Name</div>
+            <div style="width: 60%; margin: 0 auto 1.5rem auto; border-bottom: 2px solid #1a2a4f;"></div>
+            <div style="font-size: 1.1rem; color: #222; margin-bottom: 2.5rem;">
+              has successfully completed the <span id="certificateAchievement">Cybersecurity Awareness Game</span>.<br>
+              <span style="font-size: 1rem; color: #444;">CyberDefender Academy ৹ Thames Water</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2.5rem;">
+              <div style="text-align: center; flex: 1;">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #1a2a4f; margin-bottom: 0.1rem;">Maryjane</div>
+                <div style="border-top: 2px solid #1a2a4f; width: 80%; margin: 0 auto 0.3rem auto;"></div>
+                <span style="font-size: 1rem; color: #1a2a4f;">Academy Director</span>
+              </div>
+              <div style="flex: 0 0 120px; display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 90px; height: 90px; background: radial-gradient(circle, gold 60%, #fffbe6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px gold; margin-bottom: 0.3rem;">
+                  <div style="font-size: 1.1rem; color: #222; font-weight: bold; text-align: center;">
+                    <div id="certificateYear">2024</div>
+                    <div style="font-size: 0.9rem; color: #555;">AWARD</div>
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #1a2a4f; margin-bottom: 0.1rem;">Amaka</div>
+                <div style="border-top: 2px solid #1a2a4f; width: 80%; margin: 0 auto 0.3rem auto;"></div>
+                <span style="font-size: 1rem; color: #1a2a4f;">Supervisor</span>
+              </div>
+            </div>
+            <button id="downloadCertificateBtn" class="cyber-button" style="margin-top: 2.5rem;">Download PDF</button>
+            <button id="closeCertificateBtn" class="cyber-button secondary" style="margin-top: 1rem;">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Certificate Export Area for PDF -->
+    <div id="certificateExportArea" style="display:none; width:1123px; height:794px; background:#fff; padding:0; margin:0 auto;">
+      <div class="certificate-border" style="border: 8px solid #1a2a4f; border-radius: 18px; width:100%; height:100%; background: #fff; position: relative; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 90%; margin: 0 auto; text-align: center;">
+          <div style="font-size: 2.2rem; font-weight: bold; letter-spacing: 0.3rem; color: #1a2a4f; margin-bottom: 0.5rem;">CERTIFICATE</div>
+          <div style="font-size: 1.3rem; font-weight: bold; color: #222; margin-bottom: 2rem;">OF COMPLETION</div>
+          <div style="font-size: 1.1rem; color: #222; margin-bottom: 1.5rem;">This certifies that</div>
+          <div id="certificateExportPlayerName" style="font-size: 2.3rem; color: #1a2a4f; font-family: 'Orbitron', serif; font-weight: bold; margin-bottom: 0.5rem;">Player Name</div>
+          <div style="width: 60%; margin: 0 auto 1.5rem auto; border-bottom: 2px solid #1a2a4f;"></div>
+          <div style="font-size: 1.1rem; color: #222; margin-bottom: 2.5rem;">
+            has successfully completed the <span id="certificateExportAchievement">Cybersecurity Awareness Game</span>.<br>
+            <span style="font-size: 1rem; color: #444;">CyberDefender Academy ৹ Thames Water</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2.5rem;">
+            <div style="text-align: center; flex: 1;">
+              <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #1a2a4f; margin-bottom: 0.1rem;">Maryjane</div>
+              <div style="border-top: 2px solid #1a2a4f; width: 80%; margin: 0 auto 0.3rem auto;"></div>
+              <span style="font-size: 1rem; color: #1a2a4f;">Academy Director</span>
+            </div>
+            <div style="flex: 0 0 120px; display: flex; flex-direction: column; align-items: center;">
+              <div style="width: 90px; height: 90px; background: radial-gradient(circle, gold 60%, #fffbe6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px gold; margin-bottom: 0.3rem;">
+                <div style="font-size: 1.1rem; color: #222; font-weight: bold; text-align: center;">
+                  <div id="certificateExportYear">2024</div>
+                  <div style="font-size: 0.9rem; color: #555;">AWARD</div>
+                </div>
+              </div>
+            </div>
+            <div style="text-align: center; flex: 1;">
+              <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: #1a2a4f; margin-bottom: 0.1rem;">Amaka</div>
+              <div style="border-top: 2px solid #1a2a4f; width: 80%; margin: 0 auto 0.3rem auto;"></div>
+              <span style="font-size: 1rem; color: #1a2a4f;">Supervisor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Name Input Modal -->
+    <div id="nameInputModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-shield"></i> Agent Registration Required</h2>
+            </div>
+            <div class="modal-body">
+                <p>Please enter your agent name to begin your cybersecurity mission.</p>
+                <p>*Your name will be used to track your progress and achievements/certificates and can't be changed later, so make sure it's your real name🙂.</p>
+                <br>
+                
+                <div class="name-input-container">
+                    <input 
+                        type="text" 
+                        id="modalPlayerNameInput" 
+                        class="name-input" 
+                        placeholder="Your full name here..."
+                        maxlength="20"
+                        required
+                    >
+                    <div class="name-input-glow"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmNameBtn" class="cyber-button">Confirm & Start</button>
+                <button id="cancelNameBtn" class="cyber-button secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+        const canvas = document.getElementById('binary-canvas');
+        const ctx = canvas.getContext('2d');
+      
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      
+        const binary = '01';
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+      
+        function draw() {
+          // Background fading
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+          // Binary text
+          ctx.fillStyle = '#0F0'; // Matrix green
+          ctx.font = `${fontSize}px monospace`;
+      
+          for (let i = 0; i < drops.length; i++) {
+            const text = binary[Math.floor(Math.random() * binary.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            drops[i]++;
+          }
+        }
+      
+        setInterval(draw, 33);
+      
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+        
+      </script>
+      
+      
+</body>
+</html> 

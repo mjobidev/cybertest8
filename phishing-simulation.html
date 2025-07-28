@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk Phishing Simulator</title>
+  <link rel="stylesheet" href="phishing-simulation.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Name Validation Modal -->
+  <div id="nameValidationModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2><i class="fas fa-user-shield"></i> Agent Registration Required</h2>
+      <p>Please enter your agent name to begin the phishing simulation.</p>
+      <p>*Remember, your name will be used to track your progress</p>
+        <p>and achievements/certificates and can't be changed later, so make sure it's your real name🙂.</p>
+      <div class="name-input-container">
+        <input 
+          type="text" 
+          id="phishingPlayerNameInput" 
+          class="name-input" 
+          placeholder="Your name here..."
+          maxlength="20"
+          required
+        >
+      </div>
+      <div style="margin-top: 20px;">
+        <button id="confirmPhishingNameBtn" class="cyber-button">Confirm & Start</button>
+        <button id="cancelPhishingNameBtn" class="cyber-button secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Burger Menu Icon -->
+<button id="burger-toggle" aria-label="Toggle Inbox">
+  ☰
+</button>
+
+
+  
+  <div id="badge-area"></div>
+  <div id="app">
+    <aside id="message-list">
+      <h2>Inbox</h2>
+      <ul id="messages"></ul>
+      <div id="inbox-actions">
+        <button id="submit-btn">Submit</button>
+        <button id="finish-btn" style="display:none;">Finish</button>
+        <button id="exit-btn">Exit</button>
+      </div>
+    </aside>
+    <main id="message-view">
+      <div id="message-content">
+        <h3 id="message-subject"></h3>
+        <div id="conversation"></div>
+      </div>
+      <div id="reply-section">
+        <textarea id="reply-input" placeholder="Type your reply..."></textarea>
+        <button id="send-reply">Send</button>
+        <button id="report-phishing">Report Phishing</button>
+      </div>
+      <div id="feedback"></div>
+    </main>
+  </div>
+  <div id="exit-modal" class="modal">
+    <div class="modal-content">
+      <p>You will lose your progress if you exit.</p>
+      <p>Are you sure you want to exit?</p>
+      <button id="exit-yes">Yes</button>
+      <button id="exit-no">No</button>
+    </div>
+  </div>
+  <div id="submit-modal" class="modal">
+    <div class="modal-content">
+      <p>Please interact with every message (reply or report) before submitting 🙂.</p>
+      <button id="submit-ok">OK</button>
+    </div>
+  </div>
+  <div id="final-score-modal" class="modal">
+    <div class="modal-content">
+      <h2>Game Complete!</h2>
+      <div id="score-summary"></div>
+      <div style="margin: 18px 0;">
+        <label for="cert-name">Your Name:</label>
+        <input id="cert-name" type="text" placeholder="Enter your name" style="margin-left:8px;" />
+      </div>
+      <div id="certificate-preview" style="margin: 18px 0;"></div>
+      <button id="download-certificate">Preview Certificate</button>
+      <button id="download-pdf" style="display:none;">Download PDF</button>
+      <button id="close-score-modal">Close</button>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="phishing-simulation.js"></script>
+
+  <script>
+  const burger = document.getElementById('burger-toggle');
+  const inbox = document.getElementById('message-list');
+
+  // Toggle inbox when burger is clicked
+  burger.addEventListener('click', () => {
+    inbox.classList.toggle('active');
+  });
+
+  // Close inbox when clicking anywhere outside it (on mobile)
+  document.addEventListener('click', (event) => {
+    const isBurger = event.target === burger || burger.contains(event.target);
+    const isInbox = inbox.contains(event.target);
+
+    // Only close if it's open and click is outside both the menu and icon
+    if (inbox.classList.contains('active') && !isBurger && !isInbox) {
+      inbox.classList.remove('active');
+    }
+  });
+</script>
+
+  
+  
+</body>
+</html> 

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Your Experience - CyberDefender</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="rating-experience.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="cyber-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberDefender</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Loading feedback system...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>CyberDefender</span>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Back to Home</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Rating Form -->
+    <div class="rating-container">
+        <div class="rating-content">
+            <div class="rating-header">
+                <h1><i class="fas fa-star"></i> Rate Your Experience</h1>
+                <p>Help us improve CyberDefender by sharing your feedback</p>
+            </div>
+
+            <form id="ratingForm" class="rating-form">
+                <!-- Name Input -->
+                <div class="rating-section">
+                    <h2>Your Information <span class="required">*</span></h2>
+                    <div class="question-group">
+                        <label for="userName">Your Name <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            id="userName" 
+                            name="userName" 
+                            class="name-input-field"
+                            placeholder="Enter your full name..."
+                            maxlength="50"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Overall Rating -->
+                <div class="rating-section">
+                    <h2>Overall Experience <span class="required">*</span></h2>
+                    <div class="star-rating">
+                        <div class="stars">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                        <span class="rating-text">Click to rate</span>
+                    </div>
+                </div>
+
+                <!-- Game Experience -->
+                <div class="rating-section">
+                    <h2>Game Experience</h2>
+                    <div class="question-group">
+                        <label>How would you rate the shooting game? <span class="required">*</span></label>
+                        <div class="star-rating small">
+                            <div class="stars">
+                                <i class="fas fa-star" data-rating="1" data-category="shooting"></i>
+                                <i class="fas fa-star" data-rating="2" data-category="shooting"></i>
+                                <i class="fas fa-star" data-rating="3" data-category="shooting"></i>
+                                <i class="fas fa-star" data-rating="4" data-category="shooting"></i>
+                                <i class="fas fa-star" data-rating="5" data-category="shooting"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>How would you rate the phishing simulation? <span class="required">*</span></label>
+                        <div class="star-rating small">
+                            <div class="stars">
+                                <i class="fas fa-star" data-rating="1" data-category="phishing"></i>
+                                <i class="fas fa-star" data-rating="2" data-category="phishing"></i>
+                                <i class="fas fa-star" data-rating="3" data-category="phishing"></i>
+                                <i class="fas fa-star" data-rating="4" data-category="phishing"></i>
+                                <i class="fas fa-star" data-rating="5" data-category="phishing"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>How would you rate the cybersecurity questions? <span class="required">*</span></label>
+                        <div class="star-rating small">
+                            <div class="stars">
+                                <i class="fas fa-star" data-rating="1" data-category="questions"></i>
+                                <i class="fas fa-star" data-rating="2" data-category="questions"></i>
+                                <i class="fas fa-star" data-rating="3" data-category="questions"></i>
+                                <i class="fas fa-star" data-rating="4" data-category="questions"></i>
+                                <i class="fas fa-star" data-rating="5" data-category="questions"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Experience -->
+                <div class="rating-section">
+                    <h2>Learning Experience</h2>
+                    <div class="question-group">
+                        <label>How much did you learn about cybersecurity? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="learning" value="nothing">
+                                <span>Nothing new</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="learning" value="little">
+                                <span>A little bit</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="learning" value="moderate">
+                                <span>Moderate amount</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="learning" value="lot">
+                                <span>A lot</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="learning" value="excellent">
+                                <span>Excellent learning</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>Which topics were most helpful? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="helpful_topics" value="phishing">
+                                <span>Phishing awareness</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="helpful_topics" value="passwords">
+                                <span>Password security</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="helpful_topics" value="mfa">
+                                <span>Multi-factor authentication</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="helpful_topics" value="social">
+                                <span>Social engineering</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="helpful_topics" value="general">
+                                <span>General cybersecurity</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Experience -->
+                <div class="rating-section">
+                    <h2>User Experience</h2>
+                    <div class="question-group">
+                        <label>How easy was it to navigate the website? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="navigation" value="very_difficult">
+                                <span>Very difficult</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="navigation" value="difficult">
+                                <span>Difficult</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="navigation" value="neutral">
+                                <span>Neutral</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="navigation" value="easy">
+                                <span>Easy</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="navigation" value="very_easy">
+                                <span>Very easy</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>How would you rate the visual design? <span class="required">*</span></label>
+                        <div class="star-rating small">
+                            <div class="stars">
+                                <i class="fas fa-star" data-rating="1" data-category="design"></i>
+                                <i class="fas fa-star" data-rating="2" data-category="design"></i>
+                                <i class="fas fa-star" data-rating="3" data-category="design"></i>
+                                <i class="fas fa-star" data-rating="4" data-category="design"></i>
+                                <i class="fas fa-star" data-rating="5" data-category="design"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>Would you recommend this to others? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="recommend" value="definitely_not">
+                                <span>Definitely not</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="recommend" value="probably_not">
+                                <span>Probably not</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="recommend" value="maybe">
+                                <span>Maybe</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="recommend" value="probably">
+                                <span>Probably</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="recommend" value="definitely">
+                                <span>Definitely</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="rating-section">
+                    <h2>Additional Feedback <span class="optional">(Optional)</span></h2>
+                    
+                    <div class="question-group">
+                        <label for="improvements">How can we improve CyberDefender?</label>
+                        <textarea 
+                            id="improvements" 
+                            name="improvements" 
+                            placeholder="Share your ideas for improvements... (optional)"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="problems">Did you encounter any problems or bugs?</label>
+                        <textarea 
+                            id="problems" 
+                            name="problems" 
+                            placeholder="Describe any issues you experienced... (optional)"
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="additional">Any other comments or suggestions?</label>
+                        <textarea 
+                            id="additional" 
+                            name="additional" 
+                            placeholder="Share any other thoughts... (optional)"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Submit Feedback</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Thank You!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Your feedback has been submitted successfully. We appreciate your input and will use it to improve CyberDefender!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="backToHomeBtn" class="cyber-button">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="rating-experience.js"></script>
+</body>
+</html> 
